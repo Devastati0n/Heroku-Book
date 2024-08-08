@@ -1,6 +1,7 @@
 const express = require('express'); 
-const router = require('.');
-const app = express(); 
+const router = express.Router(); 
+
+
 
 //all authors route
 router.get('/', (req,res)=>{
@@ -8,9 +9,9 @@ res.render('authors/index');
 //https://www.youtube.com/watch?v=esy4nRuShl8&list=PLZlA0Gpn_vH8jbFkBjOuFjhxANC63OmXM&index=7
 })
 
-// new author route 
 
-router.get('/', (req,res)=>{
+// new author route 
+router.get('/new', (req,res)=>{
     res.render('authors/new'); 
 
 })
