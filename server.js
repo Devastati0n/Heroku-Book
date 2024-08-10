@@ -20,6 +20,7 @@ app.use(express.static('public'))
 
 
 const mongoose = require('mongoose'); 
+
 mongoose.connect(process.env.DATABASE_URL);
 
 
@@ -29,11 +30,11 @@ db.on('error', error => console.error(error));
 db.once('open', () => console.log('connected to mongoose')); 
 
 
-
-
-
-app.use('/', indexRouter); 
 app.use('/authors', authorRouter); 
+app.use('/', indexRouter); 
+
+
+
 
 app.listen(process.env.PORT || 3000); 
 
