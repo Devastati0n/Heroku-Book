@@ -19,9 +19,22 @@ router.get('/new', (req,res)=>{
 
 //create author route
 router.post('/', (req,res)=>{
-    res.send('Create')
+    const author = new Author({
+    name: req.body.name
+    })
 
-})
+    author.save().
+    then((newAuthor)=>{
+        res.render('authors')
+  }).
+    catch((err)=>{
+        res.render('authors/new',{
+            author: author,
+            errorMessage:'Error Creating Author...'
+        })
+        })
+      })
+    
 
 
 
