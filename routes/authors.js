@@ -18,21 +18,30 @@ router.get('/new', (req,res)=>{
 
 
 //create author route
-router.post('/', (req,res)=>{
+router.post('/', async (req,res)=>{
     const author = new Author({
     name: req.body.name
     })
+    try{
+      const newAuthor = await author.save()
+      res.render('authors')
+     }catch{
+      res.render('authors/new',{
+        author: author,
+        errorMessage:'Error Creating Author'
+      })
+    }
 
-    author.save().
-    then((newAuthor)=>{
-        res.render('authors')
-  }).
-    catch((err)=>{
-        res.render('authors/new',{
-            author: author,
-            errorMessage:'Error Creating Author...'
-        })
-        })
+  //   author.save().
+  //   then((newAuthor)=>{
+  //       res.render('authors')
+  // }).
+  //   catch((err)=>{
+  //       res.render('authors/new',{
+  //           author: author,
+  //           errorMessage:'Error Creating Author...'
+  //       })
+  //       })
       })
     
 
