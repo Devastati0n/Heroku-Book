@@ -31,6 +31,7 @@ const db = mongoose.connection;
 db.on('error', error => console.error(error)); 
 db.once('open', () => console.log('connected to mongoose')); 
 
+
 app.use('/', indexRouter); 
 app.use('/authors', authorRouter); 
 
@@ -58,7 +59,7 @@ git remote add origin https://github.com/Devastati0n/full.git
 git branch -M main
 git push -u origin main
 npm i body-parser
-
+npm uninstall -D package-name
 Set-ExecutionPolicy –ExecutionPolicy RemoteSigned
 */ 
 

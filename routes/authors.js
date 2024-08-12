@@ -18,14 +18,12 @@ try{
   }catch{
   res.redirect('/')
   }
-//https://www.youtube.com/watch?v=esy4nRuShl8&list=PLZlA0Gpn_vH8jbFkBjOuFjhxANC63OmXM&index=7
 })
 
 
 // new author route 
 router.get('/new', (req,res)=>{
     res.render('authors/new', {author: new Author()}); 
-
 })
 
 
@@ -36,7 +34,7 @@ router.post('/', async (req,res)=>{
     })
     try{
       const newAuthor = await author.save()
-      res.render('authors')
+      res.redirect('authors')
      }catch{
       res.render('authors/new',{
         author: author,
