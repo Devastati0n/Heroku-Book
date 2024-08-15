@@ -59,8 +59,10 @@ git remote add origin https://github.com/Devastati0n/full.git
 git branch -M main
 git push -u origin main
 npm i body-parser
+npm i multer
 npm uninstall -D package-name
 Set-ExecutionPolicy –ExecutionPolicy RemoteSigned
+
 */ 
 
 
