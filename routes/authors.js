@@ -23,7 +23,7 @@ try{
 
 // new author route 
 router.get('/new', (req,res)=>{
-    res.render('authors/new', {author: new Author()}); 
+    res.render('authors/new', {author: new Author()})
 })
 
 
@@ -42,17 +42,7 @@ router.post('/', async (req,res)=>{
       })
     }
 
-  //   author.save().
-  //   then((newAuthor)=>{
-  //       res.render('authors')
-  // }).
-  //   catch((err)=>{
-  //       res.render('authors/new',{
-  //           author: author,
-  //           errorMessage:'Error Creating Author...'
-  //       })
-  //       })
-      })
+  })
     
 
 
