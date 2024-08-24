@@ -73,23 +73,49 @@ router.get('/:id/edit', async (req, res) => {
 
 // Update Book Route
 router.put('/:id', async (req, res) => {
-    const book = new Book({
-      title: req.body.title,
-      author: req.body.author,
-      publishDate: new Date(req.body.publishDate),
-      pageCount: req.body.pageCount,
-      description: req.body.description
-    })
-    saveCover(book, req.body.cover)
-  
+    let book
     try {
-      const newBook = await book.save()
-      res.redirect(`books/${newBook.id}`)
+      book = await Book.findById(req.params.id)
+      book.title = req.body.title
+      book.author = req.body.author
+      book.publishDate = new Date(req.body.publishDate)
+      book.pageCount = req.body.pageCount
+      book.description = req.body.description
+      if (req.body.cover != null && req.body.cover !== '') {
+        saveCover(book, req.body.cover)
+      }
+      await book.save()
+      res.redirect(`/books/${book.id}`)
     } catch {
-      renderNewPage(res, book, true)
+      if (book != null) {
+        renderEditPage(res, book, true)
+      } else {
+        res.redirect('/')
+      }
     }
   })
 
+
+
+//Delete Book Page
+router.delete('/:id', async (req,res) => {
+    let book 
+    try {
+        book = await Book.findById(req.params.id)
+        await book.deleteOne()
+        res.redirect('/books')
+
+    } catch {
+    if(book != null){
+     res.render('books/show', {
+     book: book, 
+     errorMessage:'Could not remove book'   
+    })
+    }else{
+    res.redirect('/')
+    }
+    }
+  })
 
     async function renderNewPage(res, book, hasError = false) {
     renderFormPage(res, book, 'new', hasError)
