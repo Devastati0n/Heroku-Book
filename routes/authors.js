@@ -1,7 +1,7 @@
 const express = require('express'); 
 const router = express.Router(); 
 const Author = require('../models/author')
-
+const Book = require('../models/book')
 
 //all authors route
 router.get('/', async (req,res)=>{
@@ -46,8 +46,17 @@ router.post('/', async (req, res) => {
     
 
 
-router.get('/:id', (req, res) => {
-  res.send('Show Author ' + req.params.id)
+router.get('/:id', async (req, res) => {
+  try{
+    const author = await Author.findById(req.params.id)
+    const book = await book.find({ author: author.id}).limit(6).exec()
+    res.render('author/show', {
+      author: author, 
+      booksByAuthor:books
+    })
+  }catch{
+    res.redirect('/')    
+  }
 })
 
 
@@ -80,9 +89,22 @@ router.get('/:id/edit', async (req, res) => {
     }
   })
   
-router.delete('/:id', (req, res) => {
-  res.send('Delete Author ' + req.params.id)
-})
+
+  router.delete('/:id', async (req, res) => {
+    let author
+    try {
+      const response = await Author.deleteOne({_id: req.params.id})
+      await author.remove()
+      res.redirect('/authors')
+    } catch {
+      if (author == null) {
+        res.redirect('/')
+      } else {
+        res.redirect(`/authors/${author.id}`)
+      }
+    }
+  })
+  
 
 
 
