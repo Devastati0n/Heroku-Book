@@ -27,6 +27,10 @@ router.get('/', async (req, res) => {
   }
 })
 
+// New Book Route
+router.get('/new', async (req, res) => {
+  renderNewPage(res, new Book())
+})
 
 
 // Create Book Route
@@ -104,7 +108,6 @@ router.delete('/:id', async (req,res) => {
         book = await Book.findById(req.params.id)
         await book.deleteOne()
         res.redirect('/books')
-
     } catch {
     if(book != null){
      res.render('books/show', {
@@ -117,7 +120,8 @@ router.delete('/:id', async (req,res) => {
     }
   })
 
-    async function renderNewPage(res, book, hasError = false) {
+    
+  async function renderNewPage(res, book, hasError = false) {
     renderFormPage(res, book, 'new', hasError)
   }
   
@@ -147,8 +151,6 @@ router.delete('/:id', async (req,res) => {
     }
   }
   
-
-
 
 
 function saveCover(book, coverEncoded) {

@@ -1,3 +1,5 @@
+//fix max number to 6 recently added => redirect issue somewhere mabye with edit, recently added broken
+
 if(process.env.NODE_ENV !== 'production'){
 require("dotenv").config()
 
