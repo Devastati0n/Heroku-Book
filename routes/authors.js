@@ -43,16 +43,14 @@ router.post('/', async (req, res) => {
   }
 })
 
-    
-
 
 router.get('/:id', async (req, res) => {
   try{
     const author = await Author.findById(req.params.id)
-    const book = await book.find({ author: author.id}).limit(6).exec()
-    res.render('author/show', {
+    const books = await Book.find({ author: author.id}).limit(6).exec()
+    res.render('authors/show', {
       author: author, 
-      booksByAuthor:books
+      booksByAuthor: books
     })
   }catch{
     res.redirect('/')    
