@@ -1,8 +1,7 @@
-//fix max number to 6 recently added => redirect issue somewhere mabye with edit, recently added broken
+//production or development 
 
 if(process.env.NODE_ENV !== 'production'){
 require("dotenv").config()
-
 }
 
 const express = require('express'); 
@@ -54,8 +53,10 @@ app.listen(process.env.PORT || 3000);
 
 
 /* 
+npm init -y
 npm i express ejs express-ejs-layouts
 npm i --save-dev nodemon
+npm i --save-dev dotenv
 npm i mongoose
 git init 
 npm run devStart
